@@ -27,7 +27,7 @@ python -m spacy download en_core_web_sm
 Clone this repository and install the package:
 
 ```sh
-git clone https://github.com/yourusername/sn_gram.git
+git clone https://github.com/MacLean-C/sn_gram.git
 cd sn_gram
 pip install .
 ```
