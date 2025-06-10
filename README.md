@@ -1,15 +1,3 @@
-https://packaging.python.org/en/latest/tutorials/packaging-projects/# sn_gram
-
-A simple string parser that returns a list containing BoW-style n-grams. The particularity of these n-grams is that they contain syntactic neighbors of noun/verb heads in order to increase the pertinence of generated n-grams and reduce the size of the BoW. This parser is currently used to preprocess text corpora for topic modeling using BoW-based topic models.
-
-To run this module, spaCy is required. spaCy models are installed via CLI using a structure such as: python -m spacy download en_core_web_sm
-
-python -m spacy download en_core_web_smimport spacynlp = spacy.load("en_core_web_sm")import en_core_web_smnlp = en_core_web_sm.load()doc = nlp("This is a sentence.")
-
-The doc object must be passed to the SNGramParser on initialization
-
-
-
 ```markdown
 # SNGramParser
 
