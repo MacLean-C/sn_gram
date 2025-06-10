@@ -73,19 +73,3 @@ class SNGramParser:
 
     
 
-if __name__ == "__main__":
-    import spacy
-    spacy.require_gpu()
-
-    nlp = spacy.load("en_core_web_sm")
-    
-    test_string = "The quick brown fox jumped over the large lazy dog"
-    
-    doc = nlp(test_string)
-    
-    sn_bow = SNGramParser(doc)
-    
-    sn_bow.extract_sn_grams()
-    
-    print(list(sn_bow.sn_gram_bow()))
-    print(sn_bow.sn_grams)
