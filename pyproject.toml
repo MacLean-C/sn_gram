@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+[project]
+#name of the project/mibrary I am making
+name = "sn_gram"
+version = "0.0.1"
+authors = [
+  { name="Connor MacLean", email="maclean.connor96@gmail.com" },
+]
+description = "A small package to create BoW representations using syntactic neighbors for the formation of bigrams and above."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+Issues = "https://github.com/pypa/sampleproject/issues"
