@@ -29,7 +29,6 @@ class SNGramParser:
                 chunk = [token]
                 # Add children tokens to the VP chunk
                 for child in token.children:
-                    
                     #test with other chunk lengths for examining discourse + verbs with multiple complements
                     if child.dep_ in ("aux", "auxpass", "neg", "advmod", "prep", "prt", "dobj", "attr", "prep") and len(chunk)<=1:
                         chunk.append(child)
@@ -65,7 +64,6 @@ class SNGramParser:
                         #lemmatizer here 
                         #note : lemma = int, lemma_ = str
                         np_chunks.append(" ".join([t.lemma_ for t in intermediate]))
-                        #new_bigrams.append(intermediate)
                     elif token.is_stop == False:
                         np_chunks.append(" ".join([t.lemma_ for t in intermediate]))
         
