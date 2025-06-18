@@ -30,7 +30,7 @@ class SNGramParser:
                 # Add children tokens to the VP chunk
                 for child in token.children:
                     #test with other chunk lengths for examining discourse + verbs with multiple complements
-                    if child.dep_ in ("aux", "auxpass", "neg", "advmod", "prep", "prt", "dobj", "attr", "prep") and len(chunk)<=1:
+                    if child.dep_ in ("aux", "auxpass", "neg", "advmod", "prep", "prt", "dobj", "attr", "prep", "nsubj", "dobj", "pobj") and len(chunk)<=1:
                         chunk.append(child)
                 # Sort the chunk tokens by their positions in the sentence
                 
