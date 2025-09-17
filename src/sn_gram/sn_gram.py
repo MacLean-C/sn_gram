@@ -1,4 +1,3 @@
-
 class SNGramParser:
     def __init__(self, doc):
         self.doc = doc  
@@ -26,10 +25,12 @@ class SNGramParser:
         for token in doc:
             if token.pos_ == "VERB":
                 # Start a new VP chunk with the verb
+                
                 chunk = [token]
-                #ensures all verbs are added individually
+                
+                
                 vp_chunks.append(" ".join([t.lemma_ for t in chunk]))
-
+                
                 # Add children tokens to the VP chunk
                 for child in token.children:
                     #test with other chunk lengths for examining discourse + verbs with multiple complements
@@ -43,7 +44,17 @@ class SNGramParser:
                 #lemmatizer here
                 #for text replace with .text
                 vp_chunks.append(" ".join([t.lemma_ for t in chunk]))
-        return vp_chunks
+        
+        seen = set()
+        vp_chunks_final = []
+        for sn_gram in vp_chunks:
+            if sn_gram not in seen:
+                seen.add(sn_gram)
+                vp_chunks_final.append(sn_gram)
+        
+        
+        
+        return vp_chunks_final
 
 
     def extract_np_chunks(self):
@@ -51,8 +62,8 @@ class SNGramParser:
         np_chunks = []
         for chunk in doc.noun_chunks:
             root_noun = [chunk.root]
-            #ensures all nouns are added individually
             np_chunks.append(" ".join([t.lemma_ for t in root_noun if not t.is_stop]))
+            
             #this skips over all others
             if len(chunk) <=2:
                 chunk = list(chunk)
@@ -72,8 +83,14 @@ class SNGramParser:
                         np_chunks.append(" ".join([t.lemma_ for t in intermediate]))
                     elif token.is_stop == False:
                         np_chunks.append(" ".join([t.lemma_ for t in intermediate]))
-        #remove duplicates
-        return list(set(np_chunks))
-
-    
-
+        
+        
+        seen = set()
+        np_chunks_final = []
+        for sn_gram in np_chunks:
+            if sn_gram not in seen:
+                seen.add(sn_gram)
+                np_chunks_final.append(sn_gram)
+        
+        
+        return np_chunks_final
