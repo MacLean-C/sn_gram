@@ -27,6 +27,9 @@ class SNGramParser:
             if token.pos_ == "VERB":
                 # Start a new VP chunk with the verb
                 chunk = [token]
+                #ensures all verbs are added individually
+                vp_chunks.append(" ".join([t.lemma_ for t in chunk]))
+
                 # Add children tokens to the VP chunk
                 for child in token.children:
                     #test with other chunk lengths for examining discourse + verbs with multiple complements
@@ -47,6 +50,9 @@ class SNGramParser:
         doc = self.doc
         np_chunks = []
         for chunk in doc.noun_chunks:
+            root_noun = [chunk.root]
+            #ensures all nouns are added individually
+            np_chunks.append(" ".join([t.lemma_ for t in root_noun if not t.is_stop]))
             #this skips over all others
             if len(chunk) <=2:
                 chunk = list(chunk)
@@ -66,8 +72,8 @@ class SNGramParser:
                         np_chunks.append(" ".join([t.lemma_ for t in intermediate]))
                     elif token.is_stop == False:
                         np_chunks.append(" ".join([t.lemma_ for t in intermediate]))
-        
-        return np_chunks
+        #remove duplicates
+        return list(set(np_chunks))
 
     
 
