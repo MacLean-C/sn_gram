@@ -70,20 +70,30 @@ class SNGramParser:
                 np_chunks.append(" ".join([t.lemma_ for t in chunk if not t.is_stop]))
             
             else:
+                #addition of full_phrase variable in order to get entire noun phrase
+                #before we only extracted noun + complement 1, noun + comp 2, etc
+                #now we can get noun + comp 1, comp 2, comp ... in the case of words
+                #such as renewable energy goals or greenhouse gas emissions
+                full_phrase = [chunk.root]
                 for token in chunk:
-                    
                     intermediate = [chunk.root]
+                    
                     if token!=chunk.root and token.is_stop == False:
                         
                         intermediate.append(token)
                         intermediate = sorted(intermediate, key=lambda x: x.i)
                         
+                        full_phrase.append(token)
+                        full_phrase = sorted(full_phrase, key=lambda x: x.i)
+                        
                         #lemmatizer here 
                         #note : lemma = int, lemma_ = str
                         np_chunks.append(" ".join([t.lemma_ for t in intermediate]))
+                        np_chunks.append(" ".join([t.lemma_ for t in full_phrase]))
                     elif token.is_stop == False:
                         np_chunks.append(" ".join([t.lemma_ for t in intermediate]))
-        
+                        
+                        np_chunks.append(" ".join([t.lemma_ for t in full_phrase]))
         
         seen = set()
         np_chunks_final = []
